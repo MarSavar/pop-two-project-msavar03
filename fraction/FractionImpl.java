@@ -19,10 +19,20 @@ public class FractionImpl implements Fraction {
     public FractionImpl(int numerator, int denominator) {
 
         int gcd = computeGCD(numerator, denominator);
+
         this.numerator = numerator / gcd;
         this.denominator = denominator / gcd;
-        System.out.println(this.numerator+" "+this.denominator);
 
+        this.normalise();
+
+
+    }
+
+    private void normalise() {
+        if (this.numerator > 0 && this.denominator < 0) {
+            this.numerator *= -1;
+            this.denominator *= -1;
+        }
     }
 
     private int computeGCD(int number1, int number2) {
@@ -59,7 +69,12 @@ public class FractionImpl implements Fraction {
      * @param fraction the string representation of the fraction
      */
     public FractionImpl(String fraction) {
-        // TODO
+        String separate[] = fraction.split("/",2);
+        int gcd = computeGCD(Integer.parseInt(separate[0]), Integer.parseInt(separate[1]));
+
+        this.numerator = Integer.parseInt(separate[0]) / gcd;
+        this.denominator = Integer.parseInt(separate[1]) / gcd;
+        this.normalise();
     }
 
     /**
@@ -67,7 +82,10 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public Fraction add(Fraction f) {
-        return null;
+        FractionImpl frac = (FractionImpl)f;
+        int num = (this.numerator * frac.denominator) + (this.denominator * frac.numerator);
+        int den = this.denominator * frac.denominator;
+        return new FractionImpl(num,den);
     }
 
     /**
@@ -75,7 +93,10 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public Fraction subtract(Fraction f) {
-        return null;
+        FractionImpl frac = (FractionImpl)f;
+        int num = (this.numerator * frac.denominator) - (this.denominator * frac.numerator);
+        int den = this.denominator * frac.denominator;
+        return new FractionImpl(num,den);
     }
 
     /**
@@ -83,7 +104,10 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public Fraction multiply(Fraction f) {
-        return null;
+        FractionImpl frac = (FractionImpl)f;
+        int num = this.numerator * frac.numerator;
+        int den = this.denominator * frac.denominator;
+        return new FractionImpl(num,den);
     }
 
     /**
@@ -91,7 +115,10 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public Fraction divide(Fraction f) {
-        return null;
+        FractionImpl frac = (FractionImpl)f;
+        int num = this.numerator * frac.denominator;
+        int den = this.denominator * frac.numerator;
+        return new FractionImpl(num,den);
     }
 
     /**
@@ -99,7 +126,8 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public Fraction abs() {
-        return null;
+        int num = this.numerator < 0 ? this.numerator *= -1 : this.numerator;
+        return new FractionImpl(num, this.denominator);
     }
 
     /**
@@ -107,7 +135,8 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public Fraction negate() {
-        return null;
+        int num = this.numerator * -1;
+        return new FractionImpl(num,this.denominator);
     }
 
     /**
@@ -139,7 +168,9 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public Fraction inverse() {
-        return null;
+        int num = this.denominator;
+        int den = this.numerator;
+        return new FractionImpl(num,den);
     }
 
     /**
@@ -155,6 +186,8 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public String toString() {
-        return null;
+
+        if (this.denominator == 1) return String.valueOf(this.numerator);
+        return(this.numerator + "/" + this.denominator);
     }
 }
