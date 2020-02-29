@@ -12,9 +12,30 @@ public class FractionImpl implements Fraction {
      * @param numerator
      * @param denominator
      */
+
+    private int numerator;
+    private int denominator;
+
     public FractionImpl(int numerator, int denominator) {
-        // TODO
+
+        int gcd = computeGCD(numerator, denominator);
+        this.numerator = numerator / gcd;
+        this.denominator = denominator / gcd;
+        System.out.println(this.numerator+" "+this.denominator);
+
     }
+
+    private int computeGCD(int number1, int number2) {
+
+        while (number1 != 0 && number2 != 0) {
+            int temporary = number2;
+            number2 = number1 % number2;
+            number1 = temporary;
+        }
+
+        return number1 == 0 ? number2 : number1;
+    }
+
 
     /**
      * The parameter is the numerator and <pre>1</pre> is the implicit denominator.
@@ -22,7 +43,8 @@ public class FractionImpl implements Fraction {
      * @param wholeNumber representing the numerator
      */
     public FractionImpl(int wholeNumber) {
-        // TODO
+        this.numerator = wholeNumber;
+        this.denominator = 1;
     }
 
     /**
