@@ -152,7 +152,15 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (!(obj instanceof Fraction)) return false;
+        else {
+            FractionImpl f = (FractionImpl)obj;
+            int num = f.numerator;
+            int den = f.denominator;
+            FractionImpl comp = new FractionImpl(num,den);
+            return (this.numerator == comp.numerator && this.denominator == comp.denominator);
+            //return super.equals(obj);
+        }
     }
 
     /**
@@ -178,7 +186,14 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public int compareTo(Fraction o) {
-        return 0;
+        FractionImpl frac = (FractionImpl)o;
+        FractionImpl compare = new FractionImpl(frac.numerator, frac.denominator);
+        FractionImpl sub = (FractionImpl)this.subtract(compare);
+        if (this.equals(compare)) return 0;
+        else {
+            if (sub.numerator < 0) return -1;
+            else return 1;
+        }
     }
 
     /**
