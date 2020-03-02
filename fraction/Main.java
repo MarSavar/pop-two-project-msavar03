@@ -2,11 +2,13 @@ package fraction;
 
 public class Main {
     public static void main(String[] args) {
-        FractionImpl hello = new FractionImpl(2,-25);
-        FractionImpl ciao = new FractionImpl(4,50);
-        System.out.println(hello.add(ciao));
-        //FractionImpl addition = new FractionImpl(2,4);
+        FractionImpl hello = new FractionImpl("5/10");
+        System.out.println(hello);
+        FractionImpl addition = new FractionImpl(1,2);
         //System.out.println(hello.divide(addition).toString());
+        //FractionImpl newfrac = new FractionImpl(-34,2);
+
+        System.out.println(hello.add(addition));
 
 
     }

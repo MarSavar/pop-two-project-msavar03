@@ -16,25 +16,6 @@ public class FractionImpl implements Fraction {
     private int numerator;
     private int denominator;
 
-    public FractionImpl(int numerator, int denominator) {
-
-        int gcd = computeGCD(numerator, denominator);
-
-        this.numerator = numerator / gcd;
-        this.denominator = denominator / gcd;
-
-        this.normalise();
-
-
-    }
-
-    private void normalise() {
-        if (this.numerator > 0 && this.denominator < 0) {
-            this.numerator *= -1;
-            this.denominator *= -1;
-        }
-    }
-
     private int computeGCD(int number1, int number2) {
 
         while (number1 != 0 && number2 != 0) {
@@ -44,6 +25,27 @@ public class FractionImpl implements Fraction {
         }
 
         return number1 == 0 ? number2 : number1;
+    }
+
+    private void normalise(int numerator, int denominator) {
+
+        int gcd = computeGCD(numerator, denominator);
+
+        this.numerator = numerator / gcd;
+        this.denominator = denominator / gcd;
+
+        if (this.numerator > 0 && this.denominator < 0) {
+            this.numerator *= -1;
+            this.denominator *= -1;
+        }
+
+        else if (this.numerator == 0) this.denominator = 1;
+    }
+
+    public FractionImpl(int numerator, int denominator) {
+
+        normalise(numerator, denominator);
+
     }
 
 
@@ -69,12 +71,17 @@ public class FractionImpl implements Fraction {
      * @param fraction the string representation of the fraction
      */
     public FractionImpl(String fraction) {
-        String separate[] = fraction.split("/",2);
-        int gcd = computeGCD(Integer.parseInt(separate[0]), Integer.parseInt(separate[1]));
+        try {
+            String separate[] = fraction.split("/", 2);
+            int numerator = Integer.parseInt(separate[0]);
+            int denominator = Integer.parseInt(separate[1]);
+            normalise(numerator, denominator);
+        }
+        catch (ArrayIndexOutOfBoundsException out_of_bounds) {
+            this.numerator = Integer.parseInt(fraction);
+            this.denominator = 1;
+        }
 
-        this.numerator = Integer.parseInt(separate[0]) / gcd;
-        this.denominator = Integer.parseInt(separate[1]) / gcd;
-        this.normalise();
     }
 
     /**
@@ -159,7 +166,6 @@ public class FractionImpl implements Fraction {
             int den = f.denominator;
             FractionImpl comp = new FractionImpl(num,den);
             return (this.numerator == comp.numerator && this.denominator == comp.denominator);
-            //return super.equals(obj);
         }
     }
 
@@ -201,7 +207,7 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public String toString() {
-
+        if (this.numerator == 0) return ("0/1");
         if (this.denominator == 1) return String.valueOf(this.numerator);
         return(this.numerator + "/" + this.denominator);
     }
