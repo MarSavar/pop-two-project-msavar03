@@ -34,17 +34,25 @@ public class FractionImpl implements Fraction {
         this.numerator = numerator / gcd;
         this.denominator = denominator / gcd;
 
-        if (this.numerator > 0 && this.denominator < 0) {
+        if (this.denominator < 0) {
             this.numerator *= -1;
             this.denominator *= -1;
         }
 
+
         else if (this.numerator == 0) this.denominator = 1;
+
+
     }
 
     public FractionImpl(int numerator, int denominator) {
-
-        normalise(numerator, denominator);
+        try {
+            if (denominator == 0) throw new ArithmeticException();
+            else normalise(numerator, denominator);
+        }
+        catch (ArithmeticException e) {
+            System.out.println("Division by 0 is not allowed!");
+        }
 
     }
 
@@ -72,14 +80,19 @@ public class FractionImpl implements Fraction {
      */
     public FractionImpl(String fraction) {
         try {
-            String separate[] = fraction.split("/", 2);
+            String[] separate = fraction.trim().split("/", 2);
             int numerator = Integer.parseInt(separate[0]);
             int denominator = Integer.parseInt(separate[1]);
-            normalise(numerator, denominator);
+
+            if (denominator == 0) throw new ArithmeticException();
+            else normalise(numerator, denominator);
         }
         catch (ArrayIndexOutOfBoundsException out_of_bounds) {
             this.numerator = Integer.parseInt(fraction);
             this.denominator = 1;
+        }
+        catch (ArithmeticException division_by_zero) {
+            System.out.println("Division by 0 is not allowed!");
         }
 
     }
@@ -133,7 +146,7 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public Fraction abs() {
-        int num = this.numerator < 0 ? this.numerator *= -1 : this.numerator;
+        int num = this.numerator < 0 ? this.numerator * -1 : this.numerator;
         return new FractionImpl(num, this.denominator);
     }
 
@@ -142,8 +155,9 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public Fraction negate() {
-        int num = this.numerator * -1;
-        return new FractionImpl(num,this.denominator);
+        int num = this.numerator*-1;
+        return new FractionImpl(num, this.denominator);
+
     }
 
     /**
@@ -162,10 +176,8 @@ public class FractionImpl implements Fraction {
         if (!(obj instanceof Fraction)) return false;
         else {
             FractionImpl f = (FractionImpl)obj;
-            int num = f.numerator;
-            int den = f.denominator;
-            FractionImpl comp = new FractionImpl(num,den);
-            return (this.numerator == comp.numerator && this.denominator == comp.denominator);
+            FractionImpl compare = new FractionImpl(f.numerator, f.denominator);
+            return (this.numerator == compare.numerator && this.denominator == compare.denominator);
         }
     }
 
