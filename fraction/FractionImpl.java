@@ -16,7 +16,7 @@ public class FractionImpl implements Fraction {
     private int numerator;
     private int denominator;
 
-    private int computeGCD(int number1, int number2) {
+    static int computeGCD(int number1, int number2) {
 
         while (number1 != 0 && number2 != 0) {
             int temporary = number2;
@@ -205,13 +205,10 @@ public class FractionImpl implements Fraction {
     @Override
     public int compareTo(Fraction o) {
         FractionImpl frac = (FractionImpl)o;
-        FractionImpl compare = new FractionImpl(frac.numerator, frac.denominator);
-        FractionImpl sub = (FractionImpl)this.subtract(compare);
-        if (this.equals(compare)) return 0;
-        else {
-            if (sub.numerator < 0) return -1;
-            else return 1;
-        }
+        //FractionImpl compare = new FractionImpl(frac.numerator, frac.denominator);
+        FractionImpl sub = (FractionImpl)this.subtract(frac);
+        if (this.equals(frac)) return 0;
+        else return sub.numerator < 0 ? -1 : 1;
     }
 
     /**
