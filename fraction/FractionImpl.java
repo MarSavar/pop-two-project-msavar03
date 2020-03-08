@@ -88,7 +88,7 @@ public class FractionImpl implements Fraction {
             else normalise(numerator, denominator);
         }
         catch (ArrayIndexOutOfBoundsException out_of_bounds) {
-            this.numerator = Integer.parseInt(fraction);
+            this.numerator = Integer.parseInt(fraction.trim());
             this.denominator = 1;
         }
         catch (ArithmeticException division_by_zero) {
