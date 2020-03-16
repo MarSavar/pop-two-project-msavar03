@@ -2,13 +2,13 @@ package fraction;
 
 public class Main {
     public static void main(String[] args) {
-        FractionImpl hello = new FractionImpl(1,-8);
+        FractionImpl hello = new FractionImpl(1,2);
         System.out.println("The fraction is "+ hello);
         System.out.println("The absolute fraction is "+hello.abs());
         System.out.println("The inverse fraction is "+hello.inverse());
         System.out.println("The negated fraction is "+hello.negate());
 
-        FractionImpl newfrac = new FractionImpl("-8");
+        FractionImpl newfrac = new FractionImpl(1,3);
         System.out.println("The fraction is "+ newfrac);
 
         System.out.println("The sum is "+hello.add(newfrac));

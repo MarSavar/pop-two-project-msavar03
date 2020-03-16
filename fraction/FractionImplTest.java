@@ -12,6 +12,7 @@ class FractionImplTest {
     FractionImpl frac5 = new FractionImpl("50/25");
     FractionImpl frac6 = new FractionImpl(" 0 ");
     FractionImpl frac7 = new FractionImpl(" 4/10");
+    FractionImpl frac8 = new FractionImpl(8,-16);
 
 
     @Test
@@ -131,8 +132,20 @@ class FractionImplTest {
 
     @Test
     void testEquals() {
-        assertEquals(frac1.abs().equals(frac7), true);
-        assertEquals(frac1.equals(frac2), false);
+        boolean comparison = frac1.abs().equals(frac7);
+        assertEquals(comparison, true);
+
+        comparison = frac1.equals(frac2);
+        assertEquals(comparison, false);
+
+        comparison = frac5.negate().equals(frac8.inverse());
+        assertEquals(comparison, true);
+
+        comparison = frac3.equals(frac3);
+        assertEquals(comparison, true);
+
+        comparison = frac5.equals(frac5.inverse());
+        assertEquals(comparison,false);
     }
 
     @Test
@@ -159,6 +172,21 @@ class FractionImplTest {
 
     @Test
     void compareTo() {
+        int comparison = frac1.compareTo(frac2); // -2/5 is lesser than -1/4
+        assertEquals(comparison, -1);
+
+        comparison = frac1.compareTo(frac3); // -2/5 is lesser than 82
+        assertEquals(comparison, -1);
+
+        comparison = frac2.compareTo(frac4); // -1/4 is greater than -32
+        assertEquals(comparison, 1);
+
+        comparison = frac7.compareTo(frac6); // 2/5 is greater than 0
+        assertEquals(comparison, 1);
+
+        comparison = frac5.compareTo(frac8.negate().inverse()); // 2 is equal to 2
+        assertEquals(comparison, 0);
+
     }
 
     @Test

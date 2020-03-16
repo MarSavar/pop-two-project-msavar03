@@ -40,7 +40,7 @@ public class FractionImpl implements Fraction {
         }
 
 
-        else if (this.numerator == 0) this.denominator = 1;
+        if (this.numerator == 0) this.denominator = 1;
 
 
     }
@@ -205,10 +205,9 @@ public class FractionImpl implements Fraction {
     @Override
     public int compareTo(Fraction o) {
         FractionImpl frac = (FractionImpl)o;
-        //FractionImpl compare = new FractionImpl(frac.numerator, frac.denominator);
         FractionImpl sub = (FractionImpl)this.subtract(frac);
         if (this.equals(frac)) return 0;
-        else return sub.numerator < 0 ? -1 : 1;
+        return sub.numerator < 0 ? -1 : 1;
     }
 
     /**
