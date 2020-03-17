@@ -1,22 +1,18 @@
 package fraction;
 
 public class FractionImpl implements Fraction {
-    /**
-     * Parameters are the <em>numerator</em> and the <em>denominator</em>.
-     * Normalize the fraction as you create it.
-     * For instance, if the parameters are <pre>(8, -12)</pre>, create a <pre>Fraction</pre> with numerator
-     * <pre>-2</pre> and denominator <pre>3</pre>.
-     *
-     * The constructor should throw an <pre>ArithmeticException</pre> if the denominator is zero.
-     *
-     * @param numerator
-     * @param denominator
-     */
 
     private int numerator;
     private int denominator;
 
-    static int computeGCD(int number1, int number2) {
+    /**
+     * Finds the greatest common divisor between two numbers by implementing Euclid's algorithm.
+     *
+     * @param number1 representing the first number
+     * @param number2 representing the second number
+     * @return greatest common divisor between number1 and number2
+     */
+    private int computeGCD(int number1, int number2) {
 
         while (number1 != 0 && number2 != 0) {
             int temporary = number2;
@@ -27,6 +23,13 @@ public class FractionImpl implements Fraction {
         return number1 == 0 ? number2 : number1;
     }
 
+    /**
+     * Normalises the fraction by dividing both the numerator and the denominator by their greatest
+     * common divisor and by making sure that the fraction never displays a negative denominator.
+     *
+     * @param numerator representing the numerator
+     * @param denominator representing the denumerator
+     */
     private void normalise(int numerator, int denominator) {
 
         int gcd = computeGCD(numerator, denominator);
@@ -39,11 +42,20 @@ public class FractionImpl implements Fraction {
             this.denominator *= -1;
         }
 
-
         if (this.numerator == 0) this.denominator = 1;
-
-
     }
+
+    /**
+     * Parameters are the <em>numerator</em> and the <em>denominator</em>.
+     * Normalize the fraction as you create it.
+     * For instance, if the parameters are <pre>(8, -12)</pre>, create a <pre>Fraction</pre> with numerator
+     * <pre>-2</pre> and denominator <pre>3</pre>.
+     *
+     * The constructor should throw an <pre>ArithmeticException</pre> if the denominator is zero.
+     *
+     * @param numerator representing the numerator
+     * @param denominator representing the denumerator
+     */
 
     public FractionImpl(int numerator, int denominator) {
         try {
@@ -53,7 +65,6 @@ public class FractionImpl implements Fraction {
         catch (ArithmeticException e) {
             System.out.println("Division by 0 is not allowed!");
         }
-
     }
 
 
@@ -80,7 +91,7 @@ public class FractionImpl implements Fraction {
      */
     public FractionImpl(String fraction) {
         try {
-            String[] separate = fraction.trim().split("/", 2);
+            String[] separate = fraction.trim().split("/",2);
             int numerator = Integer.parseInt(separate[0]);
             int denominator = Integer.parseInt(separate[1]);
 
@@ -93,6 +104,9 @@ public class FractionImpl implements Fraction {
         }
         catch (ArithmeticException division_by_zero) {
             System.out.println("Division by 0 is not allowed!");
+        }
+        catch (NumberFormatException number_format_exception) {
+            System.out.println("Malformed input!");
         }
 
     }

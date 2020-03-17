@@ -133,19 +133,19 @@ class FractionImplTest {
     @Test
     void testEquals() {
         boolean comparison = frac1.abs().equals(frac7);
-        assertEquals(comparison, true);
+        assertTrue(comparison);
 
         comparison = frac1.equals(frac2);
-        assertEquals(comparison, false);
+        assertFalse(comparison);
 
         comparison = frac5.negate().equals(frac8.inverse());
-        assertEquals(comparison, true);
+        assertTrue(comparison);
 
-        comparison = frac3.equals(frac3);
-        assertEquals(comparison, true);
+        comparison = frac3.equals(frac6);
+        assertFalse(comparison);
 
         comparison = frac5.equals(frac5.inverse());
-        assertEquals(comparison,false);
+        assertFalse(comparison);
     }
 
     @Test
