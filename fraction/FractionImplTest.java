@@ -14,6 +14,33 @@ class FractionImplTest {
     FractionImpl frac7 = new FractionImpl("4/10");
     FractionImpl frac8 = new FractionImpl(8,-16);
 
+    @Test
+    void divisionByZero()  {
+
+        assertThrows(ArithmeticException.class, () ->  new FractionImpl("5/0"));
+
+        assertThrows(ArithmeticException.class, () ->  new FractionImpl("  5  /  0" ));
+
+        assertThrows(ArithmeticException.class, () ->  new FractionImpl(0).inverse());
+
+        assertThrows(ArithmeticException.class, () ->  new FractionImpl(-3,0));
+
+        assertThrows(ArithmeticException.class, () ->  frac7.subtract(frac7).inverse());
+    }
+
+    @Test
+    void malformedInput()  {
+
+        assertThrows(NumberFormatException.class, () ->  new FractionImpl("5/0/"));
+
+        assertThrows(NumberFormatException.class, () ->  new FractionImpl("-"));
+
+        assertThrows(NumberFormatException.class, () ->  new FractionImpl("1 0/2"));
+
+        assertThrows(NumberFormatException.class, () ->  new FractionImpl("/"));
+
+        assertThrows(NumberFormatException.class, () ->  new FractionImpl("-5/*2"));
+    }
 
     @Test
     void add() {

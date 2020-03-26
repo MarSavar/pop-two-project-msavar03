@@ -59,13 +59,8 @@ public class FractionImpl implements Fraction {
      */
 
     public FractionImpl(int numerator, int denominator) {
-        try {
             if (denominator == 0) throw new ArithmeticException();
             else normalise(numerator, denominator);
-        }
-        catch (ArithmeticException e) {
-            System.out.println("Division by 0 is not allowed!");
-        }
     }
 
 
@@ -90,24 +85,25 @@ public class FractionImpl implements Fraction {
      *
      * @param fraction the string representation of the fraction
      */
+
+
     public FractionImpl(String fraction) {
+
         try {
             String[] separate = fraction.split("/",2);
             int numerator = Integer.parseInt(separate[0].trim());
             int denominator = Integer.parseInt(separate[1].trim());
 
-            if (denominator == 0) throw new ArithmeticException();
+            if (denominator == 0) throw new ArithmeticException("Division by 0 is not allowed!");
             else normalise(numerator, denominator);
         }
         catch (ArrayIndexOutOfBoundsException out_of_bounds) {
             this.numerator = Integer.parseInt(fraction.trim());
             this.denominator = 1;
         }
-        catch (ArithmeticException division_by_zero) {
-            System.out.println("Division by 0 is not allowed!");
-        }
+
         catch (NumberFormatException number_format_exception) {
-            System.out.println("Malformed input!");
+            throw new NumberFormatException("Malformed input");
         }
 
     }

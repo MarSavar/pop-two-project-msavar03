@@ -2,7 +2,7 @@ package fraction;
 
 public class Main {
     public static void main(String[] args) {
-        FractionImpl fraction1  = new FractionImpl("-4");
+        FractionImpl fraction1  = new FractionImpl("-2/8");
         System.out.println("(1) The fraction is "+ fraction1);
         System.out.println("(1) The absolute fraction is "+fraction1.abs());
         System.out.println("(1) The inverse fraction is "+fraction1.inverse());
