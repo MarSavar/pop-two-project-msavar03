@@ -28,7 +28,7 @@ public class FractionImpl implements Fraction {
      * common divisor and by making sure that the fraction never displays a negative denominator.
      *
      * @param numerator representing the numerator
-     * @param denominator representing the denumerator
+     * @param denominator representing the denominator
      */
     private void normalise(int numerator, int denominator) {
 
@@ -43,6 +43,7 @@ public class FractionImpl implements Fraction {
         }
 
         if (this.numerator == 0) this.denominator = 1;
+
     }
 
     /**
@@ -54,7 +55,7 @@ public class FractionImpl implements Fraction {
      * The constructor should throw an <pre>ArithmeticException</pre> if the denominator is zero.
      *
      * @param numerator representing the numerator
-     * @param denominator representing the denumerator
+     * @param denominator representing the denominator
      */
 
     public FractionImpl(int numerator, int denominator) {
@@ -91,9 +92,9 @@ public class FractionImpl implements Fraction {
      */
     public FractionImpl(String fraction) {
         try {
-            String[] separate = fraction.trim().split("/",2);
-            int numerator = Integer.parseInt(separate[0]);
-            int denominator = Integer.parseInt(separate[1]);
+            String[] separate = fraction.split("/",2);
+            int numerator = Integer.parseInt(separate[0].trim());
+            int denominator = Integer.parseInt(separate[1].trim());
 
             if (denominator == 0) throw new ArithmeticException();
             else normalise(numerator, denominator);
@@ -169,7 +170,7 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public Fraction negate() {
-        int num = this.numerator*-1;
+        int num = this.numerator * -1;
         return new FractionImpl(num, this.denominator);
 
     }
@@ -229,8 +230,12 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public String toString() {
-        if (this.numerator == 0) return ("0/1");
-        if (this.denominator == 1) return String.valueOf(this.numerator);
+        // checks for special cases
+        if (this.denominator == 0) return ("Error"); // division by zero returns error
+        if (this.numerator == 0) return ("0/1"); // 0/x always returns 0/1
+        if (this.denominator == 1) return String.valueOf(this.numerator); // x/1 returns x
+
+        // all other cases
         return(this.numerator + "/" + this.denominator);
     }
 }

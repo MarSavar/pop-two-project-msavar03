@@ -11,7 +11,7 @@ class FractionImplTest {
     FractionImpl frac4 = new FractionImpl(-32);
     FractionImpl frac5 = new FractionImpl("50/25");
     FractionImpl frac6 = new FractionImpl(" 0 ");
-    FractionImpl frac7 = new FractionImpl(" 4/10");
+    FractionImpl frac7 = new FractionImpl("4/10");
     FractionImpl frac8 = new FractionImpl(8,-16);
 
 
@@ -126,9 +126,6 @@ class FractionImplTest {
         assertEquals(comparison, "-2");
     }
 
-    @Test
-    void testHashCode() {
-    }
 
     @Test
     void testEquals() {
@@ -148,9 +145,6 @@ class FractionImplTest {
         assertFalse(comparison);
     }
 
-    @Test
-    void testClone() {
-    }
 
     @Test
     void inverse() {

@@ -2,22 +2,22 @@ package fraction;
 
 public class Main {
     public static void main(String[] args) {
-        FractionImpl hello = new FractionImpl("2");
-        System.out.println("The fraction is "+ hello);
-        System.out.println("The absolute fraction is "+hello.abs());
-        System.out.println("The inverse fraction is "+hello.inverse());
-        System.out.println("The negated fraction is "+hello.negate());
+        FractionImpl fraction1  = new FractionImpl("-4");
+        System.out.println("(1) The fraction is "+ fraction1);
+        System.out.println("(1) The absolute fraction is "+fraction1.abs());
+        System.out.println("(1) The inverse fraction is "+fraction1.inverse());
+        System.out.println("(1) The negated fraction is "+fraction1.negate());
 
-        FractionImpl newfrac = new FractionImpl(1,3);
-        System.out.println("The fraction is "+ newfrac);
+        FractionImpl fraction2 = new FractionImpl(1,3);
+        System.out.println("The fraction is "+ fraction2);
 
-        System.out.println("The sum is "+hello.add(newfrac));
-        System.out.println("The difference is "+hello.subtract(newfrac));
-        System.out.println("The multiplication is "+hello.multiply(newfrac));
-        System.out.println("The division is "+hello.divide(newfrac));
+        System.out.println("The sum of "+fraction2+" and "+fraction1+" is "+fraction1.add(fraction2));
+        System.out.println("The difference is "+fraction1.subtract(fraction2));
+        System.out.println("The multiplication is "+fraction1.multiply(fraction2));
+        System.out.println("The division is "+fraction1.divide(fraction2));
 
-        System.out.println("Comparison: "+hello.compareTo(newfrac));
-        System.out.println("Equality: "+hello.equals(newfrac));
+        System.out.println("Comparison: "+fraction1.compareTo(fraction2));
+        System.out.println("Equality: "+fraction1.equals(fraction2));
         //System.out.println(hello.divide(addition).toString());
         //FractionImpl newfrac = new FractionImpl(-34,2);
 
