@@ -14,13 +14,14 @@ public class FractionImpl implements Fraction {
      */
     private int computeGCD(int number1, int number2) {
 
+
         while (number1 != 0 && number2 != 0) {
             int temporary = number2;
             number2 = number1 % number2;
             number1 = temporary;
         }
 
-        return number1 == 0 ? number2 : number1;
+        return number1 == 0 ? number2 : number1;    // returns whichever number is not 0.
     }
 
     /**
@@ -37,7 +38,7 @@ public class FractionImpl implements Fraction {
         this.numerator = numerator / gcd;
         this.denominator = denominator / gcd;
 
-        if (this.denominator < 0) {
+        if (this.denominator < 0) {     // checks and makes sure the denominator is never negative.
             this.numerator *= -1;
             this.denominator *= -1;
         }
@@ -89,7 +90,7 @@ public class FractionImpl implements Fraction {
 
     public FractionImpl(String fraction) {
 
-        try {
+        try {   // checks whether the string contains a forward slash, and splits it in two if so.
             String[] separate = fraction.split("/",2);
             int numerator = Integer.parseInt(separate[0].trim());
             int denominator = Integer.parseInt(separate[1].trim());
@@ -97,7 +98,7 @@ public class FractionImpl implements Fraction {
             if (denominator == 0) throw new ArithmeticException("Division by 0 is not allowed!");
             else normalise(numerator, denominator);
         }
-        catch (ArrayIndexOutOfBoundsException out_of_bounds) {
+        catch (ArrayIndexOutOfBoundsException out_of_bounds) {  // checks whether string is a whole number.
             this.numerator = Integer.parseInt(fraction.trim());
             this.denominator = 1;
         }
@@ -227,7 +228,7 @@ public class FractionImpl implements Fraction {
     @Override
     public String toString() {
         // checks for special cases
-        if (this.denominator == 0) return ("Error"); // division by zero returns error
+        if (this.denominator == 0) throw new ArithmeticException("Division by zero not allowed");
         if (this.numerator == 0) return ("0/1"); // 0/x always returns 0/1
         if (this.denominator == 1) return String.valueOf(this.numerator); // x/1 returns x
 
