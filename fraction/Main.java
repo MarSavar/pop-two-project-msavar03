@@ -1,101 +1,146 @@
 package fraction;
+import java.util.ArrayList;
 
 public class Main {
+
+    static int count = 1;
+
+    /**
+     * Prints out a separator.
+     */
+    public static void separator() {
+        String sep = "-";
+        System.out.println(sep.repeat(25));
+    }
+
+    /**
+     * Automates the display of functions by taking a fraction as an argument
+     * and displaying the following: normalised form, absolute value,
+     * inverted and negated versions.
+     * Increases count by 1 once the strings are displayed.
+     * @param fraction representing the fraction to be displayed.
+     */
+
+    public static void display(FractionImpl fraction) {
+
+        try {
+            System.out.println("(" + count + ") The fraction is " + fraction);
+            System.out.println("(" + count + ") The absolute fraction is " + fraction.abs());
+            System.out.println("(" + count + ") The inverse fraction is " + fraction.inverse());
+            System.out.println("(" + count + ") The negated fraction is " + fraction.negate());
+        }
+        catch (ArithmeticException e) {
+            System.out.println("Division by zero is not allowed!");
+        }
+
+        separator();
+        count++;
+
+    }
+
     public static void main(String[] args) {
 
-        // Testing constructor with two integers.
+        // Constructor with two integers.
         // Positive first argument, positive second argument.
-        System.out.println("Testing constructor with two integers: 2, 4");
-        FractionImpl fraction1  = new FractionImpl(2,4);
-        System.out.println("(1) The fraction is "+ fraction1);
-        System.out.println("(1) The absolute fraction is "+fraction1.abs());
-        System.out.println("(1) The inverse fraction is "+fraction1.inverse());
-        System.out.println("(1) The negated fraction is "+fraction1.negate());
-        System.out.println("**********");
+        FractionImpl fraction1 = new FractionImpl(2, 4);
+        display(fraction1);
 
         // Positive first argument, negative second argument.
-        System.out.println("Testing constructor with two integers: 3, -8");
         FractionImpl fraction2  = new FractionImpl(3,-8);
-        System.out.println("(2) The fraction is "+ fraction2);
-        System.out.println("(2) The absolute fraction is "+fraction2.abs());
-        System.out.println("(2) The inverse fraction is "+fraction2.inverse());
-        System.out.println("(2) The negated fraction is "+fraction2.negate());
-        System.out.println("**********");
+        display(fraction2);
 
         // Negative first argument, positive second argument.
-        System.out.println("Testing constructor with two integers: -10, 4");
         FractionImpl fraction3  = new FractionImpl(-10,4);
-        System.out.println("(3) The fraction is "+ fraction3);
-        System.out.println("(3) The absolute fraction is "+fraction3.abs());
-        System.out.println("(3) The inverse fraction is "+fraction3.inverse());
-        System.out.println("(3) The negated fraction is "+fraction3.negate());
-        System.out.println("**********");
+        display(fraction3);
 
         // Negative first argument, negative second argument.
-        System.out.println("Testing constructor with two integers: -5, -25");
-        FractionImpl fraction4  = new FractionImpl(-5,-25);
-        System.out.println("(4) The fraction is "+ fraction4);
-        System.out.println("(4) The absolute fraction is "+fraction4.abs());
-        System.out.println("(4) The inverse fraction is "+fraction4.inverse());
-        System.out.println("(4) The negated fraction is "+fraction4.negate());
-        System.out.println("**********");
+        FractionImpl fraction4  = new FractionImpl(-5,25);
+        display(fraction4);
 
-        // Testing constructor with a single integer.
-        System.out.println("Testing constructor with a single integer: -6");
+        // Constructor with a single integer.
         FractionImpl fraction5  = new FractionImpl(-6);
-        System.out.println("(5) The fraction is "+ fraction5);
-        System.out.println("(5) The absolute fraction is "+fraction5.abs());
-        System.out.println("(5) The inverse fraction is "+fraction5.inverse());
-        System.out.println("(5) The negated fraction is "+fraction5.negate());
-        System.out.println("**********");
+        display(fraction5);
 
-        // Testing constructor with strings.
-        System.out.println("Testing constructor with a string: \" -9 / 4 \"");
+        // Constructor with string including a forward slash.
         FractionImpl fraction6  = new FractionImpl(" -9 / 4 ");
-        System.out.println("(6) The fraction is "+ fraction6);
-        System.out.println("(6) The absolute fraction is "+fraction6.abs());
-        System.out.println("(6) The inverse fraction is "+fraction6.inverse());
-        System.out.println("(6) The negated fraction is "+fraction6.negate());
-        System.out.println("**********");
+        display(fraction6);
 
-        // Testing constructor with a string.
-        System.out.println("Testing constructor with a string: \" 12 \"");
-        FractionImpl fraction7  = new FractionImpl(" 12 ");
-        System.out.println("(7) The fraction is "+ fraction7);
-        System.out.println("(7) The absolute fraction is "+fraction7.abs());
-        System.out.println("(7) The inverse fraction is "+fraction7.inverse());
-        System.out.println("(7) The negated fraction is "+fraction7.negate());
-        System.out.println("**********");
-        
+        // Constructor with a string representing a whole number.
+        FractionImpl fraction7  = new FractionImpl("12");
+        display(fraction7);
+
+        // Testing 0.
+        FractionImpl fraction8  = new FractionImpl(0);
+        display(fraction8);
+
+        // Putting all fractions into an ArrayList in order to automate operations.
+        ArrayList<FractionImpl> fractions = new ArrayList<>();
+        fractions.add(fraction1);
+        fractions.add(fraction2);
+        fractions.add(fraction3);
+        fractions.add(fraction4);
+        fractions.add(fraction5);
+        fractions.add(fraction6);
+        fractions.add(fraction7);
+        fractions.add(fraction8);
+
         // Testing operations
+        System.out.println("Addition");
+        separator();
+        for (int i=0; i<8;i+=2) {
+            FractionImpl first = fractions.get(i);
+            FractionImpl second = fractions.get(i+1);
+            System.out.println(">> "+first+ " + "+ second +" = " + first.add(second));
+        }
+        separator();
 
-        // Addition
-        System.out.println("Testing addition.");
-        System.out.println("(1) "+fraction1+" + ("+fraction2+") = "+fraction1.add(fraction2));
-        System.out.println("(2) "+fraction3+" + "+fraction4+" = "+fraction3.add(fraction4));
-        System.out.println("(3) "+fraction5+" + ("+fraction6+") = "+fraction5.add(fraction6));
-        System.out.println("(4) "+fraction1+" + ("+fraction3+") = "+fraction1.add(fraction3));
+        System.out.println("Subtraction");
+        separator();
+        for (int i=0; i<8;i+=2) {
+            FractionImpl first = fractions.get(i);
+            FractionImpl second = fractions.get(i+1);
+            System.out.println(">> "+first+ " - "+ second +" = " + first.subtract(second));
+        }
+        separator();
 
-        // Subtraction
-        System.out.println("Testing subtraction.");
-        System.out.println("(1) "+fraction1+" - ("+fraction2+") = "+fraction1.subtract(fraction2));
-        System.out.println("(2) "+fraction3+" - "+fraction4+" = "+fraction3.subtract(fraction4));
-        System.out.println("(3) "+fraction5+" - ("+fraction6+") = "+fraction5.subtract(fraction6));
-        System.out.println("(4) "+fraction1+" - ("+fraction3+") = "+fraction1.subtract(fraction3));
+        System.out.println("Multiplication");
+        separator();
+        for (int i=0; i<8;i+=2) {
+            FractionImpl first = fractions.get(i);
+            FractionImpl second = fractions.get(i+1);
+            System.out.println(">> "+first+ " * "+ second +" = " + first.multiply(second));
+        }
+        separator();
 
-        // Multiplication
-        System.out.println("Testing multiplication.");
-        System.out.println("(1) "+fraction1+" * ("+fraction2+") = "+fraction1.multiply(fraction2));
-        System.out.println("(2) "+fraction3+" * "+fraction4+" = "+fraction3.multiply(fraction4));
-        System.out.println("(3) "+fraction5+" * ("+fraction6+") = "+fraction5.multiply(fraction6));
-        System.out.println("(4) "+fraction1+" * ("+fraction3+") = "+fraction1.multiply(fraction3));
+        System.out.println("Division");
+        separator();
+        for (int i=0; i<8;i+=2) {
+            FractionImpl first = fractions.get(i);
+            FractionImpl second = fractions.get(i+1);
+            try {
+                System.out.println(">> "+first+ " / "+ second +" = " + first.divide(second));
+            } catch (ArithmeticException e) {
+                System.out.println("Division by zero not allowed");
+            }
+        }
+        separator();
 
-        // Division
-        System.out.println("Testing division.");
-        System.out.println("(1) "+fraction1+" / ("+fraction2+") = "+fraction1.divide(fraction2));
-        System.out.println("(2) "+fraction3+" / "+fraction4+" = "+fraction3.divide(fraction4));
-        System.out.println("(3) "+fraction5+" / ("+fraction6+") = "+fraction5.divide(fraction6));
-        System.out.println("(4) "+fraction1+" / ("+fraction3+") = "+fraction1.divide(fraction3));
+        System.out.println("Equality");
+        separator();
+        for (int i=0; i<8;i+=2) {
+            FractionImpl first = fractions.get(i);
+            FractionImpl second = fractions.get(i+1);
+            System.out.println(">> "+first+ " = "+ second +" = " + first.equals(second));
+        }
+        separator();
+
+        System.out.println("Comparison");
+        separator();
+        for (int i=0; i<8;i+=2) {
+            FractionImpl first = fractions.get(i);
+            FractionImpl second = fractions.get(i+1);
+            System.out.println(">> "+first+ " compared to "+ second +" = " + first.compareTo(second));
+        }
 
     }
 
