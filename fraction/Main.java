@@ -18,7 +18,7 @@ public class Main {
      * Increases count by 1 once the strings are displayed.
      * @param fraction representing the fraction to be displayed.
      */
-    
+
     static int count = 1;
     public static void display(FractionImpl fraction) {
 
@@ -119,7 +119,7 @@ public class Main {
             try {
                 System.out.println(">> "+first+ " / "+ second +" = " + first.divide(second));
             } catch (ArithmeticException e) {
-                System.out.println("Division by zero not allowed");
+                System.out.println("Division by 0 is not allowed");
             }
         }
         separator();
