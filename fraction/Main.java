@@ -18,9 +18,9 @@ public class Main {
      * Increases count by 1 once the strings are displayed.
      * @param fraction representing the fraction to be displayed.
      */
+    
     static int count = 1;
     public static void display(FractionImpl fraction) {
-
 
         try {
             System.out.println("(" + count + ") The fraction is " + fraction);
