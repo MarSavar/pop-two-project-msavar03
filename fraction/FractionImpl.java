@@ -86,10 +86,9 @@ public class FractionImpl implements Fraction {
      * @param fraction the string representation of the fraction
      */
 
-
     public FractionImpl(String fraction) {
 
-        try {   // checks whether the string contains a forward slash, and splits it in two if so.
+        try {   // Tries splitting the string into two.
             String[] separate = fraction.split("/",2);
             int numerator = Integer.parseInt(separate[0].trim());
             int denominator = Integer.parseInt(separate[1].trim());
@@ -97,7 +96,7 @@ public class FractionImpl implements Fraction {
             if (denominator == 0) throw new ArithmeticException("Division by 0 is not allowed!");
             else normalise(numerator, denominator);
         }
-        catch (ArrayIndexOutOfBoundsException out_of_bounds) {  // checks whether string is a whole number.
+        catch (ArrayIndexOutOfBoundsException out_of_bounds) {  // If it fails, constructs fraction using  whole number.
             this.numerator = Integer.parseInt(fraction.trim());
             this.denominator = 1;
         }

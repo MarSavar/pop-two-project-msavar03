@@ -16,22 +16,24 @@ class FractionImplTest {
 
     @Test
     void divisionByZero()  {
-        // Tests division by zero with different constructors.
+
         assertThrows(ArithmeticException.class, () ->  new FractionImpl("5/0"));
         assertThrows(ArithmeticException.class, () ->  new FractionImpl("  5  /  0" ));
         assertThrows(ArithmeticException.class, () ->  new FractionImpl(0).inverse());
         assertThrows(ArithmeticException.class, () ->  new FractionImpl(-3,0));
         assertThrows(ArithmeticException.class, () ->  frac7.subtract(frac7).inverse());
+
     }
 
     @Test
     void malformedInput()  {
-        //Tests malformed inputs with the string constructor.
+
         assertThrows(NumberFormatException.class, () ->  new FractionImpl("5/0/"));
         assertThrows(NumberFormatException.class, () ->  new FractionImpl("-"));
         assertThrows(NumberFormatException.class, () ->  new FractionImpl("1 0/2"));
         assertThrows(NumberFormatException.class, () ->  new FractionImpl("/"));
         assertThrows(NumberFormatException.class, () ->  new FractionImpl("-5/*2"));
+
     }
 
     @Test
@@ -57,6 +59,7 @@ class FractionImplTest {
 
     @Test
     void subtract() {
+
         String comparison = frac1.subtract(frac1).toString();
         assertEquals(comparison, "0/1");
 
@@ -75,6 +78,7 @@ class FractionImplTest {
 
     @Test
     void multiply() {
+
         String comparison = frac1.multiply(frac1).toString();
         assertEquals(comparison, "4/25");
 
@@ -93,6 +97,7 @@ class FractionImplTest {
 
     @Test
     void divide() {
+
         String comparison = frac1.divide(frac1).toString();
         assertEquals(comparison, "1");
 
@@ -111,6 +116,7 @@ class FractionImplTest {
 
     @Test
     void abs() {
+
         String comparison = frac1.abs().toString();
         assertEquals(comparison, "2/5");
 
@@ -129,6 +135,7 @@ class FractionImplTest {
 
     @Test
     void negate() {
+
         String comparison = frac1.negate().toString();
         assertEquals(comparison, "2/5");
 
@@ -148,6 +155,7 @@ class FractionImplTest {
 
     @Test
     void testEquals() {
+
         boolean comparison = frac1.abs().equals(frac7);
         assertTrue(comparison);
 
@@ -167,6 +175,7 @@ class FractionImplTest {
 
     @Test
     void inverse() {
+
         String comparison = frac1.inverse().toString();
         assertEquals(comparison, "-5/2");
 
@@ -185,6 +194,7 @@ class FractionImplTest {
 
     @Test
     void compareTo() {
+
         int comparison = frac1.compareTo(frac2);
         assertEquals(comparison, -1); // -2/5 < -1/4
 
@@ -204,6 +214,7 @@ class FractionImplTest {
 
     @Test
     void testToString() {
+
         String comparison = frac1.toString();
         assertEquals(comparison, "-2/5");
 
