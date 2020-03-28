@@ -12,8 +12,7 @@ public class FractionImpl implements Fraction {
      * @param number2 representing the second number
      * @return greatest common divisor between number1 and number2
      */
-    private int computeGCD(int number1, int number2) {
-
+    private static int computeGCD(int number1, int number2) {
 
         while (number1 != 0 && number2 != 0) {
             int temporary = number2;
@@ -104,7 +103,7 @@ public class FractionImpl implements Fraction {
         }
 
         catch (NumberFormatException number_format_exception) {
-            throw new NumberFormatException("Malformed input");
+            throw new NumberFormatException("Malformed input!");
         }
 
     }
@@ -217,7 +216,7 @@ public class FractionImpl implements Fraction {
     @Override
     public int compareTo(Fraction o) {
         FractionImpl frac = (FractionImpl)o;
-        FractionImpl sub = (FractionImpl)this.subtract(frac);
+        FractionImpl sub = (FractionImpl)this.subtract(frac); // subtracts the function argument to 'this'.
         if (this.equals(frac)) return 0;
         return sub.numerator < 0 ? -1 : 1;
     }
@@ -227,12 +226,11 @@ public class FractionImpl implements Fraction {
      */
     @Override
     public String toString() {
-        // checks for special cases
-        if (this.denominator == 0) throw new ArithmeticException("Division by zero not allowed");
-        if (this.numerator == 0) return ("0/1"); // 0/x always returns 0/1
-        if (this.denominator == 1) return String.valueOf(this.numerator); // x/1 returns x
+        // Checks for special cases.
+        if (this.numerator == 0) return ("0/1"); // 0/x always returns 0/1.
+        if (this.denominator == 1) return String.valueOf(this.numerator); // x/1 returns x.
 
-        // all other cases
+        // All other cases.
         return(this.numerator + "/" + this.denominator);
     }
 }

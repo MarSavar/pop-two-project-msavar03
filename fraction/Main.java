@@ -3,8 +3,6 @@ import java.util.ArrayList;
 
 public class Main {
 
-    static int count = 1;
-
     /**
      * Prints out a separator.
      */
@@ -20,8 +18,9 @@ public class Main {
      * Increases count by 1 once the strings are displayed.
      * @param fraction representing the fraction to be displayed.
      */
-
+    static int count = 1;
     public static void display(FractionImpl fraction) {
+
 
         try {
             System.out.println("(" + count + ") The fraction is " + fraction);
@@ -30,7 +29,7 @@ public class Main {
             System.out.println("(" + count + ") The negated fraction is " + fraction.negate());
         }
         catch (ArithmeticException e) {
-            System.out.println("Division by zero is not allowed!");
+            System.out.println("Division by 0 is not allowed!");
         }
 
         separator();
