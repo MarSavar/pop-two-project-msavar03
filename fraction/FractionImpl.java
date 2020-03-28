@@ -59,7 +59,7 @@ public class FractionImpl implements Fraction {
      */
 
     public FractionImpl(int numerator, int denominator) {
-            if (denominator == 0) throw new ArithmeticException();
+            if (denominator == 0) throw new ArithmeticException("Division by 0 is not allowed!");
             else normalise(numerator, denominator);
     }
 
