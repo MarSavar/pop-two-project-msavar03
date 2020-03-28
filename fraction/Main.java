@@ -119,7 +119,7 @@ public class Main {
             try {
                 System.out.println(">> "+first+ " / "+ second +" = " + first.divide(second));
             } catch (ArithmeticException e) {
-                System.out.println("Division by 0 is not allowed");
+                System.out.println("Division by 0 is not allowed!");
             }
         }
         separator();
